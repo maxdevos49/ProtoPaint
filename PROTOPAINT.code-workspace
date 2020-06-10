@@ -1,0 +1,86 @@
+{
+    "folders": [
+        {
+            "name": "Source",
+            "path": "./src"
+        },
+        {
+            "name": "Other",
+            "path": "."
+        }
+    ],
+    "settings": {
+        "files.exclude": {
+            "**/node_modules": false,
+            "**/.git": false,
+            "**/.svn": true,
+            "**/.hg": true,
+            "**/.gitignore": false,
+            "**/src": true,
+            "**/CVS": true,
+            "**/.DS_Store": true,
+            "**/*.js.m*": true,
+            "**/*.js": {
+                "when": "$(basename).ts"
+            }
+        },
+        "workbench.colorCustomizations": {
+            "activityBar.background": "#2f7c47",
+            "activityBar.activeBackground": "#2f7c47",
+            "activityBar.activeBorder": "#422c74",
+            "activityBar.foreground": "#e7e7e7",
+            "activityBar.inactiveForeground": "#e7e7e799",
+            "activityBarBadge.background": "#422c74",
+            "activityBarBadge.foreground": "#e7e7e7",
+            "titleBar.activeBackground": "#215732",
+            "titleBar.inactiveBackground": "#21573299",
+            "titleBar.activeForeground": "#e7e7e7",
+            "titleBar.inactiveForeground": "#e7e7e799",
+            "statusBar.background": "#215732",
+            "statusBarItem.hoverBackground": "#2f7c47",
+            "statusBar.foreground": "#e7e7e7",
+            "statusBar.border": "#215732",
+            "titleBar.border": "#215732"
+        },
+        "peacock.color": "#215732",
+        "better-comments.tags": [
+            {
+                "tag": "!",
+                "color": "#FF2D00",
+                "strikethrough": false,
+                "backgroundColor": "transparent"
+            },
+            {
+                "tag": "#",
+                "color": "#ffffff",
+                "strikethrough": false,
+                "backgroundColor": "#007777"
+            },
+            {
+                "tag": "?",
+                "color": "#3498DB",
+                "strikethrough": false,
+                "backgroundColor": "transparent"
+            },
+            {
+                "tag": "//",
+                "color": "#474747",
+                "strikethrough": true,
+                "backgroundColor": "transparent"
+            },
+            {
+                "tag": "todo",
+                "color": "#FF8C00",
+                "strikethrough": false,
+                "backgroundColor": "transparent"
+            },
+            {
+                "tag": "*",
+                "color": "#98C379",
+                "strikethrough": false,
+                "backgroundColor": "transparent"
+            }
+        ],
+        "javascript.preferences.importModuleSpecifier": "relative"
+    }
+}

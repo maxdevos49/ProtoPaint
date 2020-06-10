@@ -1,0 +1,84 @@
+:root {
+    --dragger-size: 8px;
+    --dragger-color: rgb(30, 30, 30);
+    --dragger-highlight-color: white;
+    --dragger-highlight-size: 30%;
+    --dragger-highlight-radius: 4px;
+}
+
+div[data-dragger] {
+    position: absolute;
+    background-color: var(--dragger-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.2s;
+    z-index: 100;
+}
+
+div[data-dragger]>hr {
+    margin: 0;
+    padding: 0;
+    background-color: var(--dragger-highlight-color);
+    border-radius: var(--dragger-highlight-radius);
+}
+
+/** Horizontal Resize **/
+
+div[data-dragger="right"], div[data-dragger="left"] {
+    cursor: col-resize;
+    top: 0;
+    height: 100%;
+    width: var(--dragger-size);
+}
+
+div[data-dragger="right"] {
+    left: 100%;
+}
+
+div[data-dragger="left"] {
+    right: 100%;
+}
+
+/** Horizontal Resize Highlight **/
+
+div[data-dragger="right"]>hr, div[data-dragger="left"]>hr {
+    height: var(--dragger-highlight-size);
+    width: 25%;
+}
+
+/** Horizontal Resize Hover **/
+
+div[data-dragger="right"]:hover, div[data-dragger="left"]:hover {
+    width: calc(var(--dragger-size) + 10px);
+}
+
+/** Vertical Resize **/
+
+div[data-dragger="top"], div[data-dragger="bottom"] {
+    cursor: row-resize;
+    height: var(--dragger-size);
+    left: 0;
+    width: 100%;
+}
+
+div[data-dragger="top"] {
+    bottom: 100%;
+}
+
+div[data-dragger="bottom"] {
+    top: 100%;
+}
+
+/** Vertical Resize Highlight **/
+
+div[data-dragger="top"]>hr, div[data-dragger="bottom"]>hr {
+    width: var(--dragger-highlight-size);
+    height: 25%;
+}
+
+/** Vertical Resize Hover **/
+
+div[data-dragger="top"]:hover, div[data-dragger="bottom"]:hover {
+    height: calc(var(--dragger-size) + 10px);
+}

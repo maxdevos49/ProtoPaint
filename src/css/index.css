@@ -1,0 +1,235 @@
+/** ---------------------------- Theme variables ------------------------------ **/
+
+:root {
+    /* Backdrop styles */
+    --backdrop-background-color: rgba(60, 60, 60, 1);
+    /* Panel styles */
+    --panel-color: white;
+    --panel-background-color: rgba(30, 30, 30, 1);
+    --panel-highlight-background-color: rgba(45, 45, 45, 0.95);
+}
+
+/* * {
+    font-family: "Fira Code" !important;
+} */
+
+/** ---------------------------------- Setup ---------------------------------- **/
+
+@import url(https://cdn.rawgit.com/tonsky/FiraCode/1.205/distr/fira_code.css);
+body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--backdrop-background-color);
+    color: var(--panel-color);
+    height: 100%;
+}
+
+header {
+    padding: 2px;
+    margin: 0;
+    background-color: var(--panel-background-color);
+    flex: 0 1 auto;
+    /* The above is shorthand for:
+  flex-grow: 0,
+  flex-shrink: 1,
+  flex-basis: auto
+  */
+}
+
+section#content {
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+    height: 100%;
+    flex: 1 1 auto;
+    position: relative;
+    /* border: solid red 1px; */
+}
+
+footer {
+    background-color: var(--panel-background-color);
+    flex: 0 1 18px;
+}
+
+/** -------------------------------Interaction layer ------------------------- **/
+
+div#interaction-layer {
+    height: 100%;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    background-color: transparent;
+    position: absolute;
+}
+
+/** ---------------------------------- Canvas ------------------------------------------ **/
+
+#protoCanvas {
+    background-image: linear-gradient(45deg, #808080 25%, transparent 25%), linear-gradient(-45deg, #808080 25%, transparent 25%), linear-gradient(45deg, transparent 75%, #808080 75%), linear-gradient(-45deg, transparent 75%, #808080 75%);
+    background-size: 20px 20px;
+    background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+    position: absolute;
+    margin: 0;
+    padding: 0;
+    border: solid white 1px;
+}
+
+/** ----------------------------------- Footer Menu------------------------------------------------- **/
+
+footer>div {
+    display: flex;
+    flex-grow: 1;
+    flex-direction: row;
+    padding: 0 4px 0 4px;
+    align-items: center;
+}
+
+footer>div#left {
+    align-content: flex-start;
+}
+
+footer>div#right {
+    justify-content: flex-end;
+}
+
+span.footer-value {
+    font-family: "Fira Code";
+    padding: 0 12px;
+    transition: 0.2s;
+    cursor: pointer;
+    font-size: smaller;
+    text-align: center;
+    vertical-align: middle;
+}
+
+span.footer-value:hover {
+    background-color: rgba(70, 70, 70, 1);
+}
+
+/** ----------------------------------- Miscellaneous ------------------------------------------ **/
+
+kbd {
+    background-color: rgb(170, 170, 170);
+}
+
+div[data-panel] {
+    background-color: var(--panel-highlight-background-color);
+    /* box-shadow: 0 4px 8px 0 black !important; */
+    color: var(--panel-color);
+    /* margin: 10px; */
+}
+
+.no-select {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+/** ---------------------- Style the left and right panels ------------------------ **/
+
+div[data-panel="left"], div[data-panel="right"] {
+    min-width: 200px;
+    max-width: 40%;
+    width: 25%;
+    height: 100%;
+    padding: 0;
+    transition: transform 0.4s;
+    position: relative;
+    /* flex: 1 1 auto; */
+    /* margin: 5px; */
+}
+
+div[data-panel="left"] {
+    float: left;
+}
+
+div[data-panel="right"] {
+    float: right;
+}
+
+div[data-panel="left"].hide {
+    transform: translateX(-110%);
+}
+
+div[data-panel="right"].hide {
+    transform: translateX(110%);
+}
+
+/** ------------------------------ File Menu Dropdowns --------------------------- **/
+
+nav ul, nav li {
+    margin: 0;
+    padding: 0;
+    display: block;
+    position: relative;
+}
+
+nav>ul {
+    display: flex;
+    flex-direction: row;
+}
+
+nav>ul>li {
+    padding: 3px 10px;
+    position: relative;
+    text-transform: capitalize;
+}
+
+nav.active li:hover {
+    background-color: rgb(0, 110, 255);
+}
+
+nav.active>ul li:hover>ul, nav.active>ul li:focus-within>ul, nav.active>ul li ul:hover, nav.active>ul li ul:focus {
+    visibility: visible;
+    opacity: 1;
+}
+
+nav li>ul.dropdown {
+    min-width: 200px;
+    transition: 0.2s;
+    visibility: hidden;
+    opacity: 0;
+    left: 0;
+    position: absolute;
+    z-index: 1500;
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
+    background-color: rgba(126, 126, 126, 0.95);
+    overflow: hidden;
+}
+
+ul.dropdown>li {
+    width: 100%;
+    padding: 3px 8px;
+    position: relative;
+    white-space: nowrap;
+    display: flex;
+    justify-content: space-between;
+}
+
+ul.dropdown>li span.grow {
+    flex-grow: 1;
+    min-width: 20px;
+}
+
+ul.dropdown>hr {
+    margin: 2px 0;
+    padding: 0;
+    border: 1px rgba(255, 255, 255, 0.3) solid;
+    width: 100%;
+}
+
+nav li:hover {
+    cursor: pointer;
+}
+
+nav kbd {
+    margin: auto;
+    padding: 2px 4px;
+}

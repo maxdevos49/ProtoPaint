@@ -1,0 +1,39 @@
+{
+    "name": "protopaint",
+    "version": "0.0.1",
+    "description": "Advanced Paint",
+    "main": "index.js",
+    "devDependencies": {
+        "@types/express": "^4.17.6",
+        "@types/ip": "^1.1.0",
+        "@types/ts-nameof": "^4.2.1",
+        "concurrently": "^5.1.0",
+        "express": "^4.17.1",
+        "ip": "^1.1.5",
+        "source-map-support": "^0.5.12",
+        "ts-nameof": "^5.0.0",
+        "ts-node": "^8.10.1",
+        "ttypescript": "^1.5.10",
+        "typescript": "^3.8.3"
+    },
+    "dependencies": {
+        "esm": "^3.2.25"
+    },
+    "scripts": {
+        "build": "ttsc",
+        "start": "node -r esm -r source-map-support/register ./dev-server.js",
+        "dev": "ttsc && concurrently \"ttsc -w\" \"nodemon\""
+    },
+    "nodemonConfig": {
+        "watch": [
+            "src"
+        ],
+        "exec": "npm start",
+        "ext": "js"
+    },
+    "repository": {
+        "type": "git"
+    },
+    "author": "Maxwell DeVos",
+    "license": "ISC"
+}
