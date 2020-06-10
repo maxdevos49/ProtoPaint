@@ -12,5 +12,5 @@ app.use((_, res) => {
 })
 
 server.listen(8080, function () {
-    console.log(`Project running at ${ip.address()}:8080`);
+    console.log(`Project running at ${ip.address()}:${process.env.PORT || 8080}`);
 });
