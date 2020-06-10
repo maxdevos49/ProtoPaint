@@ -11,6 +11,6 @@ app.use((_, res) => {
     res.redirect("/index.html");
 })
 
-server.listen(8080, function () {
+server.listen(process.env.PORT || 8080, function () {
     console.log(`Project running at ${ip.address()}:${process.env.PORT || 8080}`);
 });
