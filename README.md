@@ -1,5 +1,6 @@
 # ProtoPaint
 [![time tracker](https://wakatime.com/badge/github/maxdevos49/ProtoPaint.svg)](https://wakatime.com/badge/github/maxdevos49/ProtoPaint)
+[![Actions Status](https://github.com/{owner}/{repo}/workflows/{workflow_name}/badge.svg)](https://github.com/{owner}/{repo}/actions)
 
 A advanced Paint Application made with Typescript. This application is designed with extensibility, modularity, and maintainability as the top priority to create a application with desktop quality editing and power eventually.
   
