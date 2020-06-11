@@ -1,6 +1,6 @@
 import { Canvas } from "./controllers/Canvas.js";
 import { View } from "./controllers/View.js";
-import { FooterConfiguration } from "./extensions/FooterConfiguration.js";
+import { FooterConfiguration } from "./configurations/FooterConfiguration.js";
 import { InteractionLayer } from "./extensions/InteractionLayerExtension.js";
 import { EditMode } from "./modes/EditMode.js";
 import { PanMode } from "./modes/PanMode.js";
