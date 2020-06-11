@@ -11,12 +11,13 @@
     ],
     "settings": {
         "files.exclude": {
-            "**/node_modules": false,
+            // "**/node_modules": false,
             "**/.git": false,
             "**/.svn": true,
             "**/.hg": true,
             "**/.gitignore": false,
             "**/src": true,
+            "**/tests": true,
             "**/CVS": true,
             "**/.DS_Store": true,
             "**/*.js.m*": true,
