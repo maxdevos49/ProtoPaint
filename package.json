@@ -17,12 +17,15 @@
         "express": "^4.17.1",
         "ip": "^1.1.5",
         "node": "^14.x",
+        "prototest": "^0.1.1",
         "source-map-support": "^0.5.12"
     },
     "scripts": {
         "build": "ttsc",
         "start": "node -r source-map-support/register ./dev-server.js",
-        "dev": "ttsc && concurrently \"ttsc -w\" \"nodemon\""
+        "dev": "ttsc && concurrently \"ttsc -w\" \"nodemon\"",
+        "pretest": "ttsc",
+        "test": "prototest"
     },
     "nodemonConfig": {
         "watch": [

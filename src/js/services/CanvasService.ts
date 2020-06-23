@@ -147,7 +147,7 @@ export class CanvasService {
         this.context = this.element.getContext("2d");
 
         if (!this.context)
-            throw new Error("The canvas context failed to be initilized.");
+            throw new Error("The canvas context failed to be initialized.");
 
         //set variables to actual values
         let canvasBounds = this.element.getBoundingClientRect();
@@ -160,7 +160,7 @@ export class CanvasService {
         this.$x.subscribe(v => this.applyTransformations());
         this.$y.subscribe(v => this.applyTransformations());
         this.$width.subscribe(v => {
-            this.element.width = this.width;//clears canavas
+            this.element.width = this.width;//resets canvas
             this.applyTransformations()
         });
         this.$height.subscribe(v => {
