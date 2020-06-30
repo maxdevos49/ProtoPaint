@@ -27,6 +27,7 @@ import { Edit } from "./controllers/Edit.js";
 import { FileController } from "./controllers/FileController.js";
 import { Help } from "./controllers/Help.js";
 import { FlagForm } from "./extensions/FlagFormExtension.js";
+import { NotificationService } from "./services/NotificationService.js";
 
 class Startup implements IStartup {
 
@@ -48,6 +49,7 @@ class Startup implements IStartup {
         services.configure(PanelService, (ps) => {
             ps.registerPanel("Left", 'div[data-panel="left"]');
             ps.registerPanel("Right", 'div[data-panel="right"]');
+            ps.registerPanel("Notifications", 'div[data-panel="notifications"]');
         });
 
         services.addSingleton(InteractionModeService);
@@ -58,7 +60,12 @@ class Startup implements IStartup {
 
         services.addSingleton(FooterService);
         services.addSingleton(MouseService);
-        services.addSingleton(FlagOptionService)
+        services.addSingleton(FlagOptionService);
+
+        services.addSingleton(NotificationService);
+        services.configure(NotificationService, (ns) => {
+            ns.notificationContainer = document.querySelector(`div[data-panel="notifications"]>div.content`)
+        });
 
     }
 

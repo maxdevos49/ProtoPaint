@@ -48,6 +48,12 @@ export class PanelService {
 
         this._panels.set(name.toLowerCase(), element);
 
+        element.insertAdjacentHTML("afterbegin", /*html*/`
+<div class="panel-title">
+    <p>${name}</p>
+    <span class="no-select" onclick="this.closest('div[data-panel]').classList.add('hide')">X</span>
+</div>`)
+
         let dataSource = this._panelSource;
         dataSource.data = [...this._panels.keys()].map(v => ({ value: v }));
         this._panelSource = dataSource;
@@ -58,18 +64,21 @@ export class PanelService {
     }
 
     public hidePanel(panel: string) {
+        panel = panel.toLowerCase();
         if (this._panels.has(panel)) {
             this._panels.get(panel)?.classList.add("hide");
         }
     }
 
     public showPanel(panel: string) {
+        panel = panel.toLowerCase();
         if (this._panels.has(panel)) {
             this._panels.get(panel)?.classList.remove("hide");
         }
     }
 
     public togglePanel(panel: string) {
+        panel = panel.toLowerCase();
         if (this._panels.has(panel)) {
             this._panels.get(panel)?.classList.toggle("hide");
         }

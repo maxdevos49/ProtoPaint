@@ -103,7 +103,7 @@
                                 </li>
                                 <li>
                                     <input type="checkbox" checked>
-                                    <s>If command requires input then it opens a dynamicaly generated form for entering
+                                    <s>If command requires input then it opens a dynamically generated form for entering
                                         flags.</s> It instead just opens the autocomplete at the needed position
                                 </li>
                             </ol>
@@ -196,7 +196,8 @@
                             <ol>
                                 <li>
                                     <input type="checkbox" checked>
-                                    <s>Allow for registering configuration files to be run after all services are started</s> Just use a extension for this purpose.
+                                    <s>Allow for registering configuration files to be run after all services are
+                                        started</s> Just use a extension for this purpose.
                                 </li>
                             </ol>
                         </li>
@@ -215,7 +216,7 @@
                                 </li>
                                 <li>
                                     <input type="checkbox">
-                                    A ProtoPaint logo is displayed and some sort of loading animation is displayed. 
+                                    A ProtoPaint logo is displayed and some sort of loading animation is displayed.
                                 </li>
                             </ol>
                         </li>
@@ -312,7 +313,7 @@
                             <p>
                                 The core of this application. This framework allows the creation of CLI like commands
                                 within
-                                controller classes. These commands can then be optionaly bound to keyboard combinations
+                                controller classes. These commands can then be optionally bound to keyboard combinations
                                 or
                                 though the use of extensions appear in menus. By default this framework makes use of
                                 extensions, services, and controllers.
@@ -326,7 +327,7 @@
                             </p>
                             <h6>Services</h6>
                             <p>
-                                Can be declared as a singlton or as a transient service. They make use of dependency
+                                Can be declared as a singleton or as a transient service. They make use of dependency
                                 injection and also can be used in both extensions, controllers, and/or other services.
                                 They
                                 do not get access to hooks or the core api.
@@ -343,8 +344,8 @@
                                 The main api of this framework feels complete but small changes may come in the future.
                                 It
                                 is still decoupled from the rest of the project so it could gain a npm module of its own
-                                someday. This framework grew very large very quickly so at somepoint a refractor may be
-                                needed to trim some unneeded code off and also it definitly needs testing.
+                                someday. This framework grew very large very quickly so at some point a refractor may be
+                                needed to trim some unneeded code off and also it definitely needs testing.
                             </p>
                         </li>
                         <li>
@@ -353,15 +354,20 @@
                                 Used to allow these panels to be resized simply by adding a data tag and indicating the
                                 side
                                 to
-                                be able to be resized. Will make a npm package in the future. Functionaly complete.
+                                be able to be resized. Will make a npm package in the future. Functionally complete.
                             </p>
                         </li>
                     </ol>
                 </div>
             </div>
 
+            <!-- Notification Panel-->
+            <div data-panel="notifications">
+                <div class="content"></div>
+            </div>
+
             <!-- Search -->
-            <div id="search-container" data-panel="search" data-search="true"></div>
+            <div data-panel="search" id="search-container" data-search="true"></div>
         </div>
 
     </section>
