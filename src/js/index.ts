@@ -1,6 +1,6 @@
 import { Canvas } from "./controllers/Canvas.js";
 import { View } from "./controllers/View.js";
-import { FooterConfiguration } from "./extensions/FooterConfiguration.js";
+import { FooterConfiguration } from "./configurations/FooterConfiguration.js";
 import { InteractionLayer } from "./extensions/InteractionLayerExtension.js";
 import { EditMode } from "./modes/EditMode.js";
 import { PanMode } from "./modes/PanMode.js";
@@ -27,6 +27,8 @@ import { Edit } from "./controllers/Edit.js";
 import { FileController } from "./controllers/FileController.js";
 import { Help } from "./controllers/Help.js";
 import { FlagForm } from "./extensions/FlagFormExtension.js";
+import { NotificationService } from "./services/NotificationService.js";
+import { SplashScreen } from "./extensions/SplashScreenExtension.js";
 
 class Startup implements IStartup {
 
@@ -48,6 +50,7 @@ class Startup implements IStartup {
         services.configure(PanelService, (ps) => {
             ps.registerPanel("Left", 'div[data-panel="left"]');
             ps.registerPanel("Right", 'div[data-panel="right"]');
+            ps.registerPanel("Notifications", 'div[data-panel="notifications"]');
         });
 
         services.addSingleton(InteractionModeService);
@@ -58,7 +61,12 @@ class Startup implements IStartup {
 
         services.addSingleton(FooterService);
         services.addSingleton(MouseService);
-        services.addSingleton(FlagOptionService)
+        services.addSingleton(FlagOptionService);
+
+        services.addSingleton(NotificationService);
+        services.configure(NotificationService, (ns) => {
+            ns.notificationContainer = document.querySelector(`div[data-panel="notifications"]>div.content`)
+        });
 
     }
 
@@ -108,6 +116,10 @@ class Startup implements IStartup {
         app.registerExtension(FileMenuExtension);
         app.registerExtension(FlagForm);
         //...
+
+
+        //Do Last
+        app.registerExtension(SplashScreen);
 
     }
 }
