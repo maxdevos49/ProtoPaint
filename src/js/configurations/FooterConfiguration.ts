@@ -5,6 +5,7 @@ import { MouseService } from "../services/MouseService.js";
 import { InteractionModeService } from "../services/InteractionModeService.js";
 import { CanvasService } from "../services/CanvasService.js";
 import { PanelService } from "../services/PanelService.js";
+import { NotificationService } from "../services/NotificationService.js";
 
 @extension()
 export class FooterConfiguration {
@@ -16,6 +17,7 @@ export class FooterConfiguration {
     private readonly _ims: InteractionModeService;
     private readonly _canvas: CanvasService;
     private readonly _panel: PanelService;
+    private readonly _notify: NotificationService;
 
 
     constructor(
@@ -24,7 +26,8 @@ export class FooterConfiguration {
         mouse: MouseService,
         ims: InteractionModeService,
         canvas: CanvasService,
-        panel: PanelService
+        panel: PanelService,
+        notification: NotificationService
     ) {
         this._actionCommander = actionCommander;
         this._footer = footer;
@@ -34,14 +37,28 @@ export class FooterConfiguration {
         this._canvas = canvas;
         this._panel = panel;
 
+        this._notify = notification;
+
         this._panel.injectActionCommander(actionCommander);
     }
 
     public init(): void {
-        this._footer.registerObservableButton(this._canvas.$x, null, (v) => `X: ${Math.round(v)}`);
-        this._footer.registerObservableButton(this._canvas.$y, null, (v) => `Y: ${Math.round(v)}`);
-        this._footer.registerObservableButton(this._canvas.$scale, null, (v) => `Scale: ${Math.round(v * 100)}%`);
-        this._footer.registerObservableButton(this._canvas.$width, null, (v) => `Width: ${v}px`);
+
+
+
+        this._footer.registerObservableButton(this._canvas.$x, null, (v) => {
+            return `X: ${Math.round(v)}`
+        });
+        this._footer.registerObservableButton(this._canvas.$y, null, (v) => {
+            return `Y: ${Math.round(v)}`
+        });
+        this._footer.registerObservableButton(this._canvas.$scale, null, (v) => {
+            this._notify.notifyError("Scale: " + Math.round(v * 100) + "%");
+            return `Scale: ${Math.round(v * 100)}%`;
+        });
+        this._footer.registerObservableButton(this._canvas.$width, null, (v) => {
+            return `Width: ${v}px`
+        });
         this._footer.registerObservableButton(this._canvas.$height, null, (v) => `Height: ${v}px`);
         this._footer.registerObservableButton(this._mouse.$canvasPosition, () => console.log("click"), (value) => `Mouse X: ${Math.round(value.x)} Mouse Y: ${Math.round(value.y)}`);
 
@@ -53,6 +70,14 @@ export class FooterConfiguration {
             (value) => ({ value: value }),//The menu option formatter for autocomplete
             (value) => this._ims.activeInteractionModeKey = value //the action to perform on select
         );
-        // this._footer.registerObservableButton(this._ims.$activeInteractionModeKey, () => console.log("loopy"), (value) => `Mode: ${value}`);
+
+        this._footer.registerObservableButton(this._notify.$unread,
+            () => {
+                this._panel.togglePanel("Notifications");
+                this._notify.clearUnread();
+            },
+            (v) => {
+                return `<i class="far fa-bell"></i>${v ? " <span class='pill'>" + v + "</span>" : ""}`
+            });
     }
 }

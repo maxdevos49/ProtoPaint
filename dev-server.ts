@@ -6,6 +6,8 @@ import path from "path";
 const app: express.Application = express();
 const server: http.Server = http.createServer(app);
 
+process.title = "ProtoPaint Development Server";//does nothing.... i think
+
 app.use(express.static(path.resolve() + "/src"));
 
 app.use((_, res) => {
