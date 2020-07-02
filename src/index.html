@@ -14,13 +14,6 @@
 
     <!-- Temp styles only-->
     <style>
-        .inprogress {
-            background-color: rgba(0, 200, 0, 0.5);
-            border-radius: 3px;
-            padding: 2px;
-            margin: 2px;
-        }
-
         .scrolly {
             position: absolute;
             overflow-y: scroll;
@@ -173,19 +166,19 @@
                             <h6>Notification Panel</h6>
                             <ol>
                                 <li>
-                                    <input type="checkbox">
+                                    <input type="checkbox" checked>
                                     Create Service
                                 </li>
                                 <li>
-                                    <input type="checkbox">
+                                    <input type="checkbox" checked>
                                     Log Message, error, and warning
                                 </li>
                                 <li>
-                                    <input type="checkbox">
+                                    <input type="checkbox" checked>
                                     Removable notifications
                                 </li>
                                 <li>
-                                    <input type="checkbox">
+                                    <input type="checkbox" checked>
                                     Slide in from right and fade out when new notification. They stack upwards.
                                 </li>
                             </ol>
@@ -206,16 +199,16 @@
                             <h6>App load update</h6>
                             <ol>
                                 <li>
-                                    <input type="checkbox">
+                                    <input type="checkbox" checked>
                                     Add splash screen that is shown by default and covers the whole screen
                                 </li>
                                 <li>
-                                    <input type="checkbox">
+                                    <input type="checkbox" checked>
                                     Splash screen is removed after all extensions, controllers, and
                                     configurations are loaded
                                 </li>
                                 <li>
-                                    <input type="checkbox">
+                                    <input type="checkbox" checked>
                                     A ProtoPaint logo is displayed and some sort of loading animation is displayed.
                                 </li>
                             </ol>
@@ -362,7 +355,7 @@
             </div>
 
             <!-- Notification Panel-->
-            <div data-panel="notifications">
+            <div data-panel="notifications" class="hide">
                 <div class="content"></div>
             </div>
 
@@ -376,6 +369,11 @@
     <footer>
         <div id="right"></div>
     </footer>
+
+    <div id="splash">
+        <h1 class="shine">ProtoPaint</h1>
+        <!-- <p>Status stuff here</p> -->
+    </div>
 
     <script type="module" crossorigin="anonymous" src="./js/index.js"></script>
     <script type="module" crossorigin="anonymous" src="./lib/resize/js/resize.js"></script>

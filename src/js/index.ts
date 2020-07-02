@@ -28,6 +28,7 @@ import { FileController } from "./controllers/FileController.js";
 import { Help } from "./controllers/Help.js";
 import { FlagForm } from "./extensions/FlagFormExtension.js";
 import { NotificationService } from "./services/NotificationService.js";
+import { SplashScreen } from "./extensions/SplashScreenExtension.js";
 
 class Startup implements IStartup {
 
@@ -115,6 +116,10 @@ class Startup implements IStartup {
         app.registerExtension(FileMenuExtension);
         app.registerExtension(FlagForm);
         //...
+
+
+        //Do Last
+        app.registerExtension(SplashScreen);
 
     }
 }

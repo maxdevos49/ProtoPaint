@@ -44,20 +44,18 @@ export class FooterConfiguration {
 
     public init(): void {
 
-        this._footer.registerObservableButton(this._canvas.$x,
-            () => {
-                this._panel.togglePanel("Notifications")},
-            (v) => "||");
+
 
         this._footer.registerObservableButton(this._canvas.$x, null, (v) => {
-            // this._notify.notifyWarning(v.toString());
             return `X: ${Math.round(v)}`
         });
         this._footer.registerObservableButton(this._canvas.$y, null, (v) => {
-            this._notify.notifyError(v.toString());
             return `Y: ${Math.round(v)}`
         });
-        this._footer.registerObservableButton(this._canvas.$scale, null, (v) => `Scale: ${Math.round(v * 100)}%`);
+        this._footer.registerObservableButton(this._canvas.$scale, null, (v) => {
+            this._notify.notifyError("Scale: " + Math.round(v * 100) + "%");
+            return `Scale: ${Math.round(v * 100)}%`;
+        });
         this._footer.registerObservableButton(this._canvas.$width, null, (v) => {
             return `Width: ${v}px`
         });
@@ -72,6 +70,14 @@ export class FooterConfiguration {
             (value) => ({ value: value }),//The menu option formatter for autocomplete
             (value) => this._ims.activeInteractionModeKey = value //the action to perform on select
         );
-        // this._footer.registerObservableButton(this._ims.$activeInteractionModeKey, () => console.log("loopy"), (value) => `Mode: ${value}`);
+
+        this._footer.registerObservableButton(this._notify.$unread,
+            () => {
+                this._panel.togglePanel("Notifications");
+                this._notify.clearUnread();
+            },
+            (v) => {
+                return `<i class="far fa-bell"></i>${v ? " <span class='pill'>" + v + "</span>" : ""}`
+            });
     }
 }
