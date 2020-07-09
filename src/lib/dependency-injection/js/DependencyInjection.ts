@@ -7,23 +7,23 @@ export interface Type<T> {
 }
 
 export function service(): GenericClassDecorator<Type<object>> {
-    //By decorating the class the constuctor will have its parameters decorated with type metadata
+    //By decorating the class the constructor will have its parameters decorated with type metadata
     return function (target: Type<object>) {
-        //Maybe in the future itll be necessary to do something here 
+        //Maybe in the future it'll be necessary to do something here 
     };
 };
 
 export function extension(): GenericClassDecorator<Type<object>> {
-    //By decorating the class the constuctor will have its parameters decorated with type metadata
+    //By decorating the class the constructor will have its parameters decorated with type metadata
     return function (target: Type<object>) {
-        //Maybe in the future itll be necessary to do something here 
+        //Maybe in the future it'll be necessary to do something here 
     };
 };
 
 export class Injector {
 
     /**
-     * Recursivley resolves the dependencies of a given service
+     * Recursively resolves the dependencies of a given service
      * @param target The service to resolve
      */
     public static resolve<T>(target: Type<any>): T {
@@ -103,7 +103,7 @@ export const ServiceCollection = new class ServiceCollection implements IService
         if (this._services.has(service))
             throw `Service: ${service.name} is already registered.`;
 
-        //Create singleton before registering as singleton so we dont get a recursive loop
+        //Create singleton before registering as singleton so we don't get a recursive loop
         this._singletonInstances.set(service, Injector.resolve(service));
 
         this._services.set(service, {

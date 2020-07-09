@@ -53,7 +53,6 @@ export class FooterConfiguration {
             return `Y: ${Math.round(v)}`
         });
         this._footer.registerObservableButton(this._canvas.$scale, null, (v) => {
-            this._notify.notifyError("Scale: " + Math.round(v * 100) + "%");
             return `Scale: ${Math.round(v * 100)}%`;
         });
         this._footer.registerObservableButton(this._canvas.$width, null, (v) => {

@@ -1,10 +1,9 @@
 import { extension } from "../../lib/dependency-injection/js/DependencyInjection.js";
 import { IActionExtension } from "../../lib/action-commander/js/interfaces/IActionExtension.js";
 import { IActionCommander } from "../../lib/action-commander/js/ActionCommander.js";
-import { IParsedCommmand } from "../../lib/action-commander/js/interfaces/IParsedCommand.js";
+import { IParsedCommand } from "../../lib/action-commander/js/interfaces/IParsedCommand.js";
 import { PanelService } from "../services/PanelService.js";
 import { DataSourceCollection } from "../../lib/action-commander/js/services/DataSourceCollection.js";
-import { IFlag } from "../../lib/action-commander/js/interfaces/IFlag.js";
 
 
 @extension()
@@ -28,12 +27,12 @@ export class FlagForm implements IActionExtension {
         this._actionCommander.appendChildElement(this._flagFormContainer);
     }
 
-    public onExecution(parsedCommand: IParsedCommmand): void {
+    public onExecution(parsedCommand: IParsedCommand): void {
         if (parsedCommand.actionMetaData?.flags.size > 0 && parsedCommand.rawValues.size === 0)
             parsedCommand.cancelExecution = true;
     }
 
-    public onExecutionCancel(parsedCommand: IParsedCommmand): void {
+    public onExecutionCancel(parsedCommand: IParsedCommand): void {
 
         //show the search
         this._panelService.showSearch();
