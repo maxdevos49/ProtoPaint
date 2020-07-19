@@ -1,15 +1,23 @@
 export interface IWebComponent {
     selector: string;
     shadowOptions?: ShadowRootInit;
+    attributes?: string[];
     template: string;
 }
 
 export function WebComponent(config: IWebComponent) {
+
     return function <T extends CustomElementConstructor>(constructor: T) {
 
         Reflect.defineMetadata("selector", config.selector, constructor);
         Reflect.defineMetadata("shadowOptions", config.shadowOptions ?? { mode: "open" }, constructor);
         Reflect.defineMetadata("template", config.template, constructor);
+        Reflect.defineMetadata("attributes", config.attributes ?? [], constructor);
+
+        //define static getter "observedAttributes"
+        Object.defineProperty(constructor, "observedAttributes", {
+            get: () => config.attributes ?? [],
+        });
 
         //Register Custom Element
         window.customElements.define(config.selector, constructor);
@@ -28,4 +36,22 @@ export function initShadow<T extends HTMLElement>(target: T): ShadowRoot {
     ShadowRoot.appendChild(template.content.cloneNode(true));
 
     return ShadowRoot;
+}
+
+export function attribute<T extends Element>(name?: string) {
+
+    return function (target: T, propertyKey: string | symbol) {
+
+        name = name ?? propertyKey as string;
+
+        Object.defineProperty(target, propertyKey, {
+            get() {
+                return this.getAttribute(name);
+            },
+            set(value: string) {
+                this.setAttribute(name, value);
+            }
+        });
+
+    };
 }
