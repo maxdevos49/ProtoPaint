@@ -50,7 +50,7 @@ class Startup implements IStartup {
         services.addSingleton(PanelService);
         services.configure(PanelService, (ps) => {
             ps.registerPanel("Left", 'div[data-panel="left"]');
-            ps.registerPanel("Right", 'div[data-panel="right"]');
+            ps.registerPanel("Project Menu", 'div[data-panel="right"]');
             ps.registerPanel("Notifications", 'div[data-panel="notifications"]');
         });
 
@@ -70,6 +70,9 @@ class Startup implements IStartup {
         });
 
         services.addSingleton(ProjectService);
+        services.configure(ProjectService, (p) => {
+            p.menuElement = document.querySelector("project-menu");
+        });
     }
 
 

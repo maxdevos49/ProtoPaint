@@ -8,10 +8,11 @@ export interface IPaintLayer {
 
     layerType: LayerType;
 
+    visibility: boolean;
+
     pixelData?: IPixelData;
 
     vectorData?: IVectorData;
-
 
 }
 

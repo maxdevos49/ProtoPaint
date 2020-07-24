@@ -1,3 +1,5 @@
+import "../../lib/reflect-metadata/js/reflect-metadata.js";
+
 export interface IWebComponent {
     selector: string;
     shadowOptions?: ShadowRootInit;
@@ -44,14 +46,29 @@ export function attribute<T extends Element>(name?: string) {
 
         name = name ?? propertyKey as string;
 
-        Object.defineProperty(target, propertyKey, {
-            get() {
-                return this.getAttribute(name);
-            },
-            set(value: string) {
-                this.setAttribute(name, value);
-            }
-        });
+        let type = Reflect.getMetadata("design:type", target, propertyKey);
+
+        if (type.name !== "String") {
+
+            Object.defineProperty(target, propertyKey, {
+                get() {
+                    return JSON.parse(this.getAttribute(name));
+                },
+                set(value: string) {
+                    this.setAttribute(name, JSON.stringify(value));
+                }
+            });
+        } else {
+
+            Object.defineProperty(target, propertyKey, {
+                get() {
+                    return this.getAttribute(name);
+                },
+                set(value: string) {
+                    this.setAttribute(name, value);
+                }
+            });
+        }
 
     };
 }

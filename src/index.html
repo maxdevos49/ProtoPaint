@@ -7,7 +7,9 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
         integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <link rel="stylesheet" href="./css/index.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"
+        integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog=="
+        crossorigin="anonymous" />
     <link rel="stylesheet" href="./lib/action-commander/css/actionsearch.css" />
     <link rel="stylesheet" href="./lib/resize/css/resize.css" />
 
@@ -284,78 +286,7 @@
 
             <!-- Right Panel-->
             <div data-panel="right" data-resize="left">
-
-
-
-                <div class="scrolly">
-                    <h4>My library notes</h4>
-                    <project-menu class="no-select"></project-menu>
-                    <ol>
-                        <li>
-                            <h5>KeyCommander.js</h5>
-                            <p>
-                                Small library that makes binding key combinations(not sequences) super easy. Used for
-                                all
-                                keyboard input in this app and for the time being is mostly complete. In due time I will
-                                be
-                                making a npm package for this
-                            </p>
-                            <h6>Bugs:</h6>
-                            <ol>
-                                <li>Fails to remove "F" keys from key press history buffer</li>
-                            </ol>
-                        </li>
-                        <li>
-                            <h5>ActionCommander.js</h5>
-                            <p>
-                                The core of this application. This framework allows the creation of CLI like commands
-                                within
-                                controller classes. These commands can then be optionally bound to keyboard combinations
-                                or
-                                though the use of extensions appear in menus. By default this framework makes use of
-                                extensions, services, and controllers.
-                            </p>
-                            <br>
-                            <h6>Extensions: </h6>
-                            <p>
-                                Take advantage of many different hooks within ActionCommander. They get direct access to
-                                the
-                                api to control functionality.
-                            </p>
-                            <h6>Services</h6>
-                            <p>
-                                Can be declared as a singleton or as a transient service. They make use of dependency
-                                injection and also can be used in both extensions, controllers, and/or other services.
-                                They
-                                do not get access to hooks or the core api.
-                            </p>
-                            <h6>Controllers</h6>
-                            <p>
-                                Used to define the commands/actions to be used inside the application. They have access
-                                to
-                                use any service as needed but not extensions or the core api.
-                            </p>
-
-                            <h6>Future:</h6>
-                            <p>
-                                The main api of this framework feels complete but small changes may come in the future.
-                                It
-                                is still decoupled from the rest of the project so it could gain a npm module of its own
-                                someday. This framework grew very large very quickly so at some point a refractor may be
-                                needed to trim some unneeded code off and also it definitely needs testing.
-                            </p>
-                        </li>
-                        <li>
-                            <h5>Resize.js</h5>
-                            <p>
-                                Used to allow these panels to be resized simply by adding a data tag and indicating the
-                                side
-                                to
-                                be able to be resized. Will make a npm package in the future. Functionally complete.
-                            </p>
-                        </li>
-                    </ol>
-                </div>
+                <project-menu class="no-select"></project-menu>
             </div>
 
             <!-- Notification Panel-->
@@ -378,13 +309,15 @@
         <h1 class="shine">ProtoPaint</h1>
     </div>
 
-    <script type="module" crossorigin="anonymous" src="./js/index.js"></script>
-    <script type="module" crossorigin="anonymous" src="./lib/resize/js/resize.js"></script>
-    <script src="https://kit.fontawesome.com/c28c7acd54.js" crossorigin="anonymous"></script>
-
     <!-- Web Components -->
     <script type="module" crossorigin="anonymous" src="./js/webcomponents/project-menu.js"></script>
     <script type="module" crossorigin="anonymous" src="./js/webcomponents/menu-item.js"></script>
+
+    <!-- ProtoPaint-->
+    <script type="module" crossorigin="anonymous" src="./js/index.js"></script>
+
+    <!-- Other -->
+    <script type="module" crossorigin="anonymous" src="./lib/resize/js/resize.js"></script>
 </body>
 
 </html>

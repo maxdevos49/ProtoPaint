@@ -1,11 +1,12 @@
-import { WebComponent, initShadow } from "../helpers/webcomponent.js";
-import { ProjectService } from "../services/ProjectService.js";
-import { ServiceCollection } from "../../lib/dependency-injection/js/DependencyInjection.js";
+import { WebComponent, initShadow, attribute } from "../helpers/webcomponent.js";
+import { MenuItemElement } from "./menu-item.js";
 
 @WebComponent({
     selector: "project-menu",
-    shadowOptions: { mode: "closed", delegatesFocus: true },
+    shadowOptions: { mode: "open", delegatesFocus: true },
+    attributes: ["data", "title"],
     template: /*html*/`
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" />
 <style>
 
 :host {
@@ -20,16 +21,35 @@ import { ServiceCollection } from "../../lib/dependency-injection/js/DependencyI
 }
 
 div#header{
+    display: flex;
+    flex-direction: row;
     background-color: rgba(0,0,0,0.4);
     padding: 1px 5px;
 }
 
-h2{
+h2.title{
     margin: 0;
+    flex-grow: 0;
+}
+
+span.buttons{
+    flex-grow: 1;
+    text-align: right;
+}
+
+span.buttons>i{
+    margin: 10px 3px 3px 3px;
+    color: rgba(255,255,255,1);
+    transition: 0.2s;
+}
+
+span.buttons>i:hover{
+    color: rgba(255,255,255,0.7);
+
 }
 
 div#items{
-    padding: 1px 20px;
+    padding: 1px 0px  1px 20px;
     margin: 0;
 }
 
@@ -68,42 +88,99 @@ menu-item  menu-item:last-child:after {
 </style>
 
 <div id="header">
-    <h2>New Project</h2>
+    <span class="title">New Project</span>
+    <span class="buttons">
+        <i title="New Frame" id="add" class="fas fa-plus"></i>
+        <i title="Refresh" id="refresh" class="fas fa-sync-alt"></i>
+    </span>
 </div>
+
 <div id="items">
-    <menu-item title="Frame 1" selected="true" open="true">
-        <menu-item title="Layer 1" selected="true"></menu-item>
-        <menu-item title="Layer 2"></menu-item>
-        <menu-item title="Layer 3"></menu-item>
-        <menu-item title="Layer 4"></menu-item>
-    </menu-item>
-    <menu-item title="Frame 2">
-        <menu-item title="Layer 1"></menu-item>
-        <menu-item title="Layer 2"></menu-item>
-        <menu-item title="Layer 3"></menu-item>
-        <menu-item title="Layer 4"></menu-item>
-    </menu-item>
+    <slot>Default yeah</slot>
 </div>
 `})
-export class FrameMenu extends HTMLElement {
+export class ProjectMenuElement extends HTMLElement {
+
+    @attribute("data")
+    public data: ITreeData[];
+
+    private readonly _buttons: HTMLSpanElement;
+    private readonly _title: HTMLSpanElement;
 
     private readonly _shadowRoot: ShadowRoot;
-    private readonly _projectService: ProjectService;
 
     constructor() {
         super();
         this._shadowRoot = initShadow(this);
 
-        //because we cant use true dependency injection we must grab the service ourself. The custom element js must also be defined after the service is registered
-        this._projectService = ServiceCollection.getService(ProjectService);
+        this._buttons = this._shadowRoot.querySelector("span.buttons");
+
+        this._buttons.addEventListener("click", (e) => {
+
+            if (!(e.target as HTMLElement).closest("i"))
+                return;
+
+            e.preventDefault();
+            e.stopPropagation();
+
+            let buttonType = (e.target as HTMLElement).id;
+
+            this.dispatchEvent(new CustomEvent("menu-button-click", {
+                composed: true,
+                bubbles: true,
+                detail: {
+                    buttonType: buttonType
+                }
+            }));
+        });
+
+        // this.
     }
 
     public onConnect() {
         this.render();
     }
 
+    public attributeChangedCallback(name: string, oldValue: string, newValue: string) {
+        this.render();
+    }
+
     private render() {
 
-        //TODO 
+        let itemsContainer = this._shadowRoot.querySelector("div#items") as HTMLDivElement;
+        itemsContainer.innerHTML = "";
+
+        this.data.forEach((frame, frameIndex) => {
+
+            let frameElement = document.createElement("menu-item") as MenuItemElement;
+            frameElement.title = frame.name;
+            frameElement.frameIndex = frameIndex + "";
+            frameElement.selected = frame.selected + "";
+
+            if (frame.open)
+                frameElement.classList.add("show");
+
+            frame.data?.forEach((layer, layerIndex) => {
+                let layerElement = document.createElement("menu-item") as MenuItemElement;
+
+                layerElement.title = layer.name;
+                layerElement.layerIndex = layerIndex + "";
+                layerElement.selected = layer.selected + "";
+                layerElement.visibility = layer.visibility + "";
+
+                frameElement.appendChild(layerElement);
+            });
+
+            itemsContainer.appendChild(frameElement);
+        });
+
     }
+}
+
+export interface ITreeData {
+    name: string;
+    visibility?: boolean,
+    open?: boolean;
+    data?: ITreeData[];
+    selected?: boolean;
 }
