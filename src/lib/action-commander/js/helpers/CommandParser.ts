@@ -1,12 +1,12 @@
-import { IParsedCommmand } from "../interfaces/IParsedCommand.js";
+import { IParsedCommand } from "../interfaces/IParsedCommand.js";
 import { IActionController } from "../interfaces/IActionController.js";
 
 export class CommandParser {
 
-    public static parse(command: string, controllers: Map<string, IActionController>): IParsedCommmand {
+    public static parse(command: string, controllers: Map<string, IActionController>): IParsedCommand {
 
 
-        let parsedCommand: IParsedCommmand = {
+        let parsedCommand: IParsedCommand = {
             command: command,
             searchKey: "",
             splitCommand: [],
@@ -39,7 +39,7 @@ export class CommandParser {
         return parsedCommand;
     }
 
-    private static processSplitCommand(parsedCommand: IParsedCommmand, controllers: Map<string, IActionController>): void {
+    private static processSplitCommand(parsedCommand: IParsedCommand, controllers: Map<string, IActionController>): void {
         //parse controller
         let controller = parsedCommand.splitCommand.shift();
         if (!controllers.has(controller)) {
@@ -99,7 +99,7 @@ export class CommandParser {
         }
     }
 
-    private static splitCommand(parsedCommand: IParsedCommmand): void {
+    private static splitCommand(parsedCommand: IParsedCommand): void {
 
         let index = 0;
         let insideSingleQuote = false;

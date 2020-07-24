@@ -105,7 +105,7 @@ export class NotificationService {
             throw new TypeError("Notification message must be a valid string");
         }
 
-        if (this._containerElement.parentElement.classList.contains("hide")) {
+        if (this._containerElement?.parentElement?.classList?.contains("hide")) {
             this._unread++;
             this._unreadSubject.next(this._unread);
         }

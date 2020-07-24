@@ -14,10 +14,13 @@ export class KeyCommander {
 
         this._stopCallbackFunc = (e: KeyboardEvent, element: HTMLElement) => {
 
-            return element.tagName === "INPUT"
-                || element.tagName === "SELECT"
-                || element.tagName === "TEXTAREA"
-                || (element.contentEditable === "true");
+            return element.tagName !== "BODY";
+
+            //Below trips and dies on custom elements
+            // return element.tagName === "INPUT"
+            //     || element.tagName === "SELECT"
+            //     || element.tagName === "TEXTAREA"
+            //     || (element.contentEditable === "true");
         };
 
         this.init();
@@ -87,7 +90,7 @@ export class KeyCommander {
 
     /**
      * Formats a key binding string
-     * @param combination the intial key binding string
+     * @param combination the initial key binding string
      */
     private static formatCombination(combination: string): string {
         return combination.split("+").sort().join("+");
@@ -122,7 +125,7 @@ export class KeyCommander {
 
             let key = e.key;
 
-            if (key === "Meta") {//This is a hack because on macos the meta key is special and a pain in the ass
+            if (key === "Meta") {//This is a hack because on macosx the meta key is special and a pain in the ass
                 this._activeKeys = [];
                 return;
             }

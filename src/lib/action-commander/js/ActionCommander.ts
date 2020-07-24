@@ -1,6 +1,6 @@
 import { IActionController } from "./interfaces/IActionController.js";
 import { IActionExtension, IActionExtensionConstructor } from "./interfaces/IActionExtension.js";
-import { IParsedCommmand } from "./interfaces/IParsedCommand.js";
+import { IParsedCommand } from "./interfaces/IParsedCommand.js";
 import { IConfiguration } from "./interfaces/IConfiguration.js";
 import { Injector } from "../../dependency-injection/js/DependencyInjection.js";
 import { getActionsMetadata } from "./helpers/ActionDecorators.js";
@@ -20,8 +20,8 @@ export interface IActionCommander {
 
     registerController<T>(controller: new (...args: any[]) => T): void;
 
-    parseCommand(command: string): IParsedCommmand;
-    executeCommand(parsedCommand: IParsedCommmand): boolean;
+    parseCommand(command: string): IParsedCommand;
+    executeCommand(parsedCommand: IParsedCommand): boolean;
     parseAndExecuteCommand(command: string): boolean;
 
     focus(): void;
@@ -105,7 +105,7 @@ export class ActionCommander implements IActionCommander {
         }
 
         if (this.controllers.has(controllerName)) {
-            console.warn(`The controller: "${controller.name}" with command name: "${controllerName}" is registered more than once! The repeated occurences will be omitted`);
+            console.warn(`The controller: "${controller.name}" with command name: "${controllerName}" is registered more than once! The repeated occurrences will be omitted`);
             return;
         }
 
@@ -148,12 +148,12 @@ export class ActionCommander implements IActionCommander {
 
     //#region Parsing and Execution
 
-    public parseCommand(command: string): IParsedCommmand {
+    public parseCommand(command: string): IParsedCommand {
         return CommandParser.parse(command, this.controllers);
     }
 
 
-    public executeCommand(parsedCommand: IParsedCommmand): boolean {
+    public executeCommand(parsedCommand: IParsedCommand): boolean {
 
         if (!parsedCommand.isValid) {
             console.error(parsedCommand.errors)
@@ -256,7 +256,7 @@ export class ActionCommander implements IActionCommander {
 
     //#endregion
 
-    //#region Initilization
+    //#region Initialization
 
     public init(): void {
 
@@ -284,7 +284,7 @@ export class ActionCommander implements IActionCommander {
         this._searchContainer = document.getElementById(this._configuration.searchContainerId ?? "search-container") as HTMLDivElement;
 
         if (!this._searchContainer)
-            throw new Error(`The SearchContainerId: ${this._configuration.searchContainerId ?? "search-container"} is not valid. Aborting Initilization.`);
+            throw new Error(`The SearchContainerId: ${this._configuration.searchContainerId ?? "search-container"} is not valid. Aborting Initialization.`);
 
         //Input Element container
         this._inputElementContainer.setAttribute("class", "input-container")
@@ -306,7 +306,7 @@ export class ActionCommander implements IActionCommander {
 
             this.activateExtensionHook(ext => ext.onInput?.(e));
 
-            if (e.key.length > 1)//input event doesnt fire for 
+            if (e.key.length > 1)//input event doesn't fire for 
                 this.activateExtensionHook(ex => ex.onChange?.());
 
             if (e.key === "Enter")

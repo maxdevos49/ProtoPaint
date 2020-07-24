@@ -29,6 +29,7 @@ import { Help } from "./controllers/Help.js";
 import { FlagForm } from "./extensions/FlagFormExtension.js";
 import { NotificationService } from "./services/NotificationService.js";
 import { SplashScreen } from "./extensions/SplashScreenExtension.js";
+import { ProjectService } from "./services/ProjectService.js";
 
 class Startup implements IStartup {
 
@@ -49,7 +50,7 @@ class Startup implements IStartup {
         services.addSingleton(PanelService);
         services.configure(PanelService, (ps) => {
             ps.registerPanel("Left", 'div[data-panel="left"]');
-            ps.registerPanel("Right", 'div[data-panel="right"]');
+            ps.registerPanel("Project Menu", 'div[data-panel="right"]');
             ps.registerPanel("Notifications", 'div[data-panel="notifications"]');
         });
 
@@ -65,9 +66,13 @@ class Startup implements IStartup {
 
         services.addSingleton(NotificationService);
         services.configure(NotificationService, (ns) => {
-            ns.notificationContainer = document.querySelector(`div[data-panel="notifications"]>div.content`)
+            ns.notificationContainer = document.querySelector(`div[data-panel="notifications"]>div.content`);
         });
 
+        services.addSingleton(ProjectService);
+        services.configure(ProjectService, (p) => {
+            p.menuElement = document.querySelector("project-menu");
+        });
     }
 
 
@@ -89,7 +94,7 @@ class Startup implements IStartup {
         app.configureExtension(ActionSuggestions, (as) => {
             as.defaultDataSourceKey = "suggestions";
             as.onFocusDataSourceKey = "controllers";
-        })
+        });
 
         //Register and configure the autocomplete extension
         app.registerExtension(Autocomplete);
@@ -105,7 +110,7 @@ class Startup implements IStartup {
             ib.buttons = new Map([
                 [`<i class="fas fa-play"></i>`, (a) => a.submitSearch()],
                 [`<i class="fas fa-times"></i>`, (a) => a.clear()],
-            ])
+            ]);
         });
 
         //#endregion
@@ -133,7 +138,7 @@ let config: IConfiguration = {
         Help
     ]
 
-}
+};
 
 function main() {
     ActionCommanderBuilder

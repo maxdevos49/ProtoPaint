@@ -27,7 +27,8 @@
         "start": "node -r source-map-support/register ./dev-server.js",
         "dev": "ttsc && concurrently \"ttsc -w\" \"nodemon\"",
         "pretest": "ttsc",
-        "test": "prototest -t=\"./test/**/*.test.js\""
+        "test": "prototest -t=\"./test/**/*.test.js\"",
+        "test-current": "npm run build && prototest -t=\"./test/**/projectService.test.js\""
     },
     "nodemonConfig": {
         "watch": [

@@ -2,7 +2,7 @@ import { IActionController } from "./IActionController.js";
 import { IAction } from "./IAction.js";
 import { IParsedFlag } from "./IParsedFlag.js";
 
-export interface IParsedCommmand {
+export interface IParsedCommand {
     command: string;
     searchKey: string;
     splitCommand: string[]

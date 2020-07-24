@@ -1,7 +1,7 @@
 import { extension } from "../../../dependency-injection/js/DependencyInjection.js";
 import { IActionExtension } from "../interfaces/IActionExtension.js";
 import { IActionCommander } from "../ActionCommander.js";
-import { IParsedCommmand } from "../interfaces/IParsedCommand.js";
+import { IParsedCommand } from "../interfaces/IParsedCommand.js";
 
 @extension()
 export class ErrorDisplay implements IActionExtension {
@@ -26,7 +26,7 @@ export class ErrorDisplay implements IActionExtension {
         this._errorContainer.innerHTML = "";
     }
 
-    public onError(parsedCommand: IParsedCommmand): void {
+    public onError(parsedCommand: IParsedCommand): void {
         this._errorContainer.innerHTML = parsedCommand.errors.join(";");
     }
 
