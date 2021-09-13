@@ -30,6 +30,7 @@ import { FlagForm } from "./extensions/FlagFormExtension.js";
 import { NotificationService } from "./services/NotificationService.js";
 import { SplashScreen } from "./extensions/SplashScreenExtension.js";
 import { ProjectService } from "./services/ProjectService.js";
+import { PixelDrawingService } from "./services/PixelDrawingService.js";
 
 class Startup implements IStartup {
 
@@ -73,6 +74,15 @@ class Startup implements IStartup {
         services.configure(ProjectService, (p) => {
             p.menuElement = document.querySelector("project-menu");
         });
+
+        services.addSingleton(PixelDrawingService);
+
+        // Event Testing
+        // window.addEventListener("test", _ => {
+        //     console.log("HEYYYYYYYYY YAAAAAAAAAA");
+        // });
+
+        // window.dispatchEvent(new Event("test"));
     }
 
 

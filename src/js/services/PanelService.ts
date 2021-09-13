@@ -2,7 +2,7 @@ import { service } from "../../lib/dependency-injection/js/DependencyInjection.j
 import { IActionCommander } from "../../lib/action-commander/js/ActionCommander.js";
 import { FlagOptionService } from "./FlagOptionService.js";
 import { DataSourceCollection, SourceMode, SelectMode, IDataSource } from "../../lib/action-commander/js/services/DataSourceCollection.js";
-import { Subject, Observable, fromProperty } from "../../lib/observable/js/observable.js";
+import { Observable, fromProperty } from "../../lib/observable/js/observable.js";
 
 @service()
 export class PanelService {
@@ -51,7 +51,7 @@ export class PanelService {
         element.insertAdjacentHTML("afterbegin", /*html*/`
 <div class="panel-title">
     <p>${name}</p>
-    <span class="no-select" onclick="this.closest('div[data-panel]').classList.add('hide')">X</span>
+    <span class="no-select" onclick="this.closest('div[data-panel]').classList.add('hide')"><i class="fas fa-times fa-lg" style="padding: 3px;"></i></span>
 </div>`)
 
         let dataSource = this._panelSource;

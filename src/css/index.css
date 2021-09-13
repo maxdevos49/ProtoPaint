@@ -380,3 +380,7 @@ div#splash>h1 {
     padding: 0 4px;
     margin: 0;
 }
+
+.fa-layer-group{
+    color: rgb(255, 235, 55) !important;
+}

@@ -1,5 +1,6 @@
 import { WebComponent, initShadow, attribute } from "../helpers/webcomponent.js";
 import { MenuItemElement } from "./menu-item.js";
+import "./menu-container.js";
 
 @WebComponent({
     selector: "project-menu",
@@ -12,12 +13,8 @@ import { MenuItemElement } from "./menu-item.js";
 :host {
     display: block;
     contain: content;
-    background: rgba(255,255,255,0.1);
     padding: 0;
     margin: 0;
-    overflow: scroll;
-    min-height: 100px;
-
 }
 
 div#header{
@@ -25,16 +22,35 @@ div#header{
     flex-direction: row;
     background-color: rgba(0,0,0,0.4);
     padding: 1px 5px;
+    white-space: nowrap;
 }
 
-h2.title{
+span.title{
+    font-weight: bold;
+    font-size: 1.7rem;
+    white-space: nowrap; 
     margin: 0;
+    padding: 0;
     flex-grow: 0;
+    align-self: baseline
+}
+
+span.title>input{
+    font-size: 1.7rem;
+}
+
+span.extension{
+    white-space: nowrap; 
+    text-overflow: ellipsis;
+    opacity: 0.7;
+    align-self: baseline
 }
 
 span.buttons{
     flex-grow: 1;
     text-align: right;
+    align-self: baseline
+
 }
 
 span.buttons>i{
@@ -49,7 +65,7 @@ span.buttons>i:hover{
 }
 
 div#items{
-    padding: 1px 0px  1px 20px;
+    padding: 4px 0px  1px 20px;
     margin: 0;
 }
 
@@ -88,16 +104,16 @@ menu-item  menu-item:last-child:after {
 </style>
 
 <div id="header">
-    <span class="title">New Project</span>
+    <span class="title">New Project</span><span class="extension">.protopaint</span>
     <span class="buttons">
         <i title="New Frame" id="add" class="fas fa-plus"></i>
         <i title="Refresh" id="refresh" class="fas fa-sync-alt"></i>
     </span>
 </div>
-
-<div id="items">
-    <slot>Default yeah</slot>
-</div>
+<menu-container resize="bottom" height="250px">
+    <div id="items">
+    </div>
+</menu-container>
 `})
 export class ProjectMenuElement extends HTMLElement {
 
@@ -105,14 +121,20 @@ export class ProjectMenuElement extends HTMLElement {
     public data: ITreeData[];
 
     private readonly _buttons: HTMLSpanElement;
-    private readonly _title: HTMLSpanElement;
+    private readonly _titleSpan: HTMLSpanElement;
 
     private readonly _shadowRoot: ShadowRoot;
+
+    private _editMode: boolean;
+
 
     constructor() {
         super();
         this._shadowRoot = initShadow(this);
 
+        this._editMode = false;
+
+        this._titleSpan = this._shadowRoot.querySelector("span.title");
         this._buttons = this._shadowRoot.querySelector("span.buttons");
 
         this._buttons.addEventListener("click", (e) => {
@@ -134,10 +156,54 @@ export class ProjectMenuElement extends HTMLElement {
             }));
         });
 
-        // this.
+        this._titleSpan.addEventListener("dblclick", (e) => {
+            e.preventDefault();
+
+            if (!this._editMode) {
+
+                this._editMode = true;
+
+                let input = document.createElement("input") as HTMLInputElement;
+
+                input.addEventListener("keydown", (e: KeyboardEvent) => {
+                    if (e.key === "Escape") {
+                        this._titleSpan.innerHTML = this.title;
+                        this._editMode = false;
+                    } else if (e.key === "Enter") {
+
+                        if (input.value)
+                            this.title = input.value;
+
+                        this._titleSpan.innerHTML = this.title;
+                        this._editMode = false;
+
+                    }
+                }, false);
+
+                input.addEventListener("focusout", _ => {
+                    if (input.value)
+                        this.title = input.value;
+
+                    this._titleSpan.innerHTML = this.title;
+                    this._editMode = false;
+                }, false);
+
+                input.addEventListener("input", _ => {
+                    input.style.width = input.value.length + 1 + "ch";
+                });
+
+                // this._titleSpan.innerHTML = ``;
+                this._titleSpan.replaceChild(input, this._titleSpan.childNodes[0]);
+
+                input.value = this.title;
+                input.style.width = input.value.length + 1 + "ch";
+                input.focus();
+            }
+
+        }, false);
     }
 
-    public onConnect() {
+    public connectedCallback() {
         this.render();
     }
 
@@ -150,7 +216,7 @@ export class ProjectMenuElement extends HTMLElement {
         let itemsContainer = this._shadowRoot.querySelector("div#items") as HTMLDivElement;
         itemsContainer.innerHTML = "";
 
-        this.data.forEach((frame, frameIndex) => {
+        this.data?.forEach((frame, frameIndex) => {
 
             let frameElement = document.createElement("menu-item") as MenuItemElement;
             frameElement.title = frame.name;
@@ -173,6 +239,8 @@ export class ProjectMenuElement extends HTMLElement {
 
             itemsContainer.appendChild(frameElement);
         });
+
+        this._titleSpan.innerHTML = this.title;
 
     }
 }

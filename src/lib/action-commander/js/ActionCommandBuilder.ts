@@ -48,8 +48,8 @@ export const ActionCommanderBuilder = new class ActionCommanderBuilder {
         //run startup configure
         startup.configure(app);
 
-        app.init()
+        app.init();
 
     }
 
-}
+};

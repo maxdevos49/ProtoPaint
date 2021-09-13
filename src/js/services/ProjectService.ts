@@ -21,10 +21,13 @@ export class ProjectService {
     constructor() {
         this._defaultLayerType = LayerType.Pixel;
         this._frames = [];
+
+        //defaults
         this._selectedFrame = 0;
         this._selectedLayer = 0;
 
         this.addFrame("Frame 1");
+        this.toggleFrameList(0);
     }
 
     private init() {
@@ -219,7 +222,7 @@ export class ProjectService {
 
     public renameTitle(title: string, frameIndex: number, layerIndex?: number | null | undefined) {//TODO TEST
 
-        if (!layerIndex) {
+        if (typeof layerIndex !== "number") {
             this.getFrame(frameIndex).name = title;
         } else {
             this.getFrameLayer(frameIndex, layerIndex).name = title;

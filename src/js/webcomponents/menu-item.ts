@@ -15,8 +15,6 @@ import { WebComponent, initShadow, attribute } from "../helpers/webcomponent.js"
         border-top: rgba(255,255,255,0.1) 1px solid;
         border-bottom: rgba(255,255,255,0.1) 1px solid;
         border-collapse: collapse;
-        border-top-left-radius: 4px;
-        border-bottom-left-radius: 4px;
         transition: 0.1s;
     }
 
@@ -30,6 +28,7 @@ import { WebComponent, initShadow, attribute } from "../helpers/webcomponent.js"
 
     :host([selected="true"]){
         background: rgba(255,255,255,0.2);
+        border-radius: 4px;
     }
 
     div#header{
@@ -49,7 +48,7 @@ import { WebComponent, initShadow, attribute } from "../helpers/webcomponent.js"
     span#arrow{
         position: absolute;
         left: -15px;
-        padding: 0 4px 0 0;
+        top: 7px;
         margin: 0;
         transition: 0.2s;
         z-index: 100000;
@@ -118,10 +117,29 @@ import { WebComponent, initShadow, attribute } from "../helpers/webcomponent.js"
         transition: 0.2s;
     }
 
+    .fa-layer-group{
+        color: rgb(255, 255, 10) !important;
+    }
+
+    .fa-eye{
+        color: rgb(10,10,200) !important;
+    }
+    .fa-eye-slash{
+        color: rgb(255, 5, 5) !important;
+    }
+
+    .fa-trash-alt{
+        color: rgb(255,5,5) !important;
+    }
+
+    .fa-plus{
+        color: rgb(5,255,5) !important;
+    }
+
     
 </style>
 <div id="header">
-    <span id="arrow">▶</span>
+    <span id="arrow"><i class="fas fa-xs fa-play"></i></span>
     <span id="icon">
     <i class="fas fa-layer-group"></i>
     </span>
@@ -189,7 +207,7 @@ export class MenuItemElement extends HTMLElement {
             }));
 
             this.classList.toggle("show");
-        });
+        }, false);
 
         //select
         this._headerDiv.addEventListener("click", e => {
@@ -201,7 +219,7 @@ export class MenuItemElement extends HTMLElement {
                 composed: true,
                 detail: {
                     frameIndex: parseInt(this.frameIndex ?? (this.parentElement as MenuItemElement).frameIndex),
-                    LayerIndex: parseInt(this.layerIndex) ?? null
+                    layerIndex: parseInt(this.layerIndex) ?? null
                 }
             }));
 
@@ -218,7 +236,7 @@ export class MenuItemElement extends HTMLElement {
                 (this.parentElement as MenuItemElement).selected = "true";//parent
             }
 
-        });
+        }, false);
 
         //Button click
         this._extraSpan.addEventListener("click", (e: MouseEvent) => {
@@ -247,7 +265,7 @@ export class MenuItemElement extends HTMLElement {
             }
 
 
-        });
+        }, false);
 
         //edit name
         this._titleSpan.addEventListener("dblclick", (e) => {
@@ -308,7 +326,7 @@ export class MenuItemElement extends HTMLElement {
             detail: {
                 title: name,
                 frameIndex: parseInt(this.frameIndex ?? (this.parentElement as MenuItemElement).frameIndex),
-                LayerIndex: parseInt(this.layerIndex) ?? null
+                layerIndex: parseInt(this.layerIndex) ?? null
             }
         }));
     }
@@ -345,17 +363,6 @@ export class MenuItemElement extends HTMLElement {
             (this._extraSpan.querySelector("#remove") as HTMLElement).title = "Remove Layer";
         }
 
-        if (this.hasAttribute("visibility")) {
-
-            // console.log(this.visibility);
-
-            // if (this.visibility) {
-            //     console.log("Hey hey what is that noise");
-            //     let i = this._extraSpan.querySelector("i#visibility");
-            //     console.log(i, this);
-            //     i.classList.toggle("fa-eye");
-            //     i.classList.toggle("fa-eye-slash");
-        }
     }
 
 }

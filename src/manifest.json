@@ -1,0 +1,17 @@
+{
+    "name": "Protopaint",
+    "theme_color": "#cecece",
+    "background_color": "#2196f3",
+    "display": "minimal-ui",
+    "orientation": "landscape",
+    "Scope": "/",
+    "start_url": "/",
+    "icons": [
+        {
+            "src": "images/icons/icon-72x72.png",
+            "sizes": "72x72",
+            "type": "image/png"
+        }
+    ],
+    "splash_pages": null
+}
