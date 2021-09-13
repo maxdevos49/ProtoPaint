@@ -2,28 +2,35 @@ import { InteractionMode } from "../services/InteractionModeService.js";
 import { IInteractionMode } from "../interfaces/IInteractionMode.js";
 import { Vector } from "../helpers/vector.js";
 import { CanvasService } from "../services/CanvasService.js";
+import { PixelDrawingService } from "../services/PixelDrawingService.js";
 
 @InteractionMode()
 export class EditMode implements IInteractionMode {
 
     private _mouseDown: boolean;
     private _previousPosition: Vector;
-
     private readonly _canvas: CanvasService;
-    constructor(canvas: CanvasService) {
+    private readonly _pixel: PixelDrawingService;
+
+
+    constructor(canvas: CanvasService, pixel: PixelDrawingService) {
         this._canvas = canvas;
+        this._pixel = pixel;
+
+        this._previousPosition = new Vector();
+
     }
 
     public init(): void {
-        throw new Error("Method not implemented.");
+        this._canvas.interactionLayer.style.cursor = "crosshair";
     }
 
     public onMouseDown(e: MouseEvent): void {
-        this.mouseDown();
+        this._pixel.activate(e.offsetX, e.offsetY);
+
     }
 
     public onMouseUp(e: MouseEvent): void {
-        this.mouseUp();
     }
 
     public onMouseMove(e: MouseEvent): void {
@@ -36,7 +43,6 @@ export class EditMode implements IInteractionMode {
 
 
     public onMouseLeave(e: MouseEvent): void {
-        this.mouseUp();
     }
 
     public onMouseDblClick(e: MouseEvent): void {
@@ -47,7 +53,6 @@ export class EditMode implements IInteractionMode {
     }
 
     public onContextMenu(e: MouseEvent): void {
-        this.mouseUp();
     }
 
     public onWheel(e: WheelEvent): void {
@@ -58,13 +63,5 @@ export class EditMode implements IInteractionMode {
     }
 
 
-    private mouseDown(): void {
-        this._mouseDown = true;
-        this._canvas.interactionLayer.style.cursor = "grabbing";
-    }
 
-    private mouseUp(): void {
-        this._mouseDown = false;
-        this._canvas.interactionLayer.style.cursor = "grab";
-    }
 }

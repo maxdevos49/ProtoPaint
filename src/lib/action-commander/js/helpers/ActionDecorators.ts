@@ -55,7 +55,7 @@ export function action(name: string, summary: string, description?: string): Met
 //#region Flag Decorator
 
 /**
- * Declares a paramater as a command flag
+ * Declares a parameter as a command flag
  * @param flags Flags the action contains
  */
 export function flag(flags: Array<string>, description: string, suggestionsKey?: string): ParameterDecorator {

@@ -1,13 +1,23 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
     <title>ProtoPaint</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="Description" content="Protopaint is a web powered vector graphic software built to make it easier to edit and create graphics for a variety of purposes.">
+
+    <!-- PWA Stuff-->
+    <link rel="manifest" href="manifest.json">
+
     <!-- HTML -->
     <link rel="stylesheet" href="https://cdn.rawgit.com/tonsky/FiraCode/1.205/distr/fira_code.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
         integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <link rel="stylesheet" href="./css/index.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"
+        integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog=="
+        crossorigin="anonymous" />
     <link rel="stylesheet" href="./lib/action-commander/css/actionsearch.css" />
     <link rel="stylesheet" href="./lib/resize/css/resize.css" />
 
@@ -46,312 +56,22 @@
             <!-- Left Panel-->
             <div data-panel="left" data-resize="right">
 
-                <div class="scrolly">
-                    <h2>ProtoPaint</h2>
-                    <p>Started: March 26, 2020</p>
-
-                    <p>Advanced paint application built with javascript. Extensibility and maintainability are the main
-                        goals with some ambitious features planned. </p>
-
-                    <h4>TODO List</h4>
-                    <ul style="list-style: none; margin: 0; padding: 0">
-                        <li>
-                            <h6>HTML/CSS Updates</h6>
-                            <ol>
-                                <li>
-                                    <input type="checkbox" checked>
-                                    Update page to use flex box where the footer and header have fixed heights and the
-                                    interaction area grows to fit the remaining space
-                                </li>
-                                <li>
-                                    <input type="checkbox" checked>
-                                    Clean up unused/unneeded css from old website
-                                </li>
-                                <li>
-                                    <input type="checkbox" checked>
-                                    Pick a font to use for the application.(FiraCode for monospace and default bootstrap
-                                    for elsewhere)
-                                </li>
-                                <li>
-                                    <input type="checkbox" checked>
-                                    adjust panel color to look a little inset(distinguish from footer and header)
-                                </li>
-                            </ol>
-                        </li>
-                        <li>
-                            <h6>File Menu</h6>
-                            <ol>
-                                <li>
-                                    <input type="checkbox" checked>
-                                    Builds upon variation binding.
-                                </li>
-                                <li>
-                                    <input type="checkbox" checked>
-                                    Displays key combo if applicable
-                                </li>
-                                <li>
-                                    <input type="checkbox" checked>
-                                    <s> Can use an observable list for options</s> If options are needed it is displayed
-                                    as autocomplete
-                                </li>
-                                <li>
-                                    <input type="checkbox" checked>
-                                    <s>If command requires input then it opens a dynamically generated form for entering
-                                        flags.</s> It instead just opens the autocomplete at the needed position
-                                </li>
-                            </ol>
-                        </li>
-
-                        <li>
-                            <h6>Action Search</h6>
-                            <ol>
-                                <li>
-                                    <input type="checkbox" checked>
-                                    Fix flags so they display grouped together
-                                </li>
-                                <li>
-                                    <input type="checkbox" checked>
-                                    When using the autocomplete on the flag add the "=" instead of a space
-                                </li>
-                                <li>
-                                    <input type="checkbox" checked>
-                                    Commands can use autocomplete for selecting flag option values
-                                </li>
-                                <li>
-                                    <input type="checkbox" checked>
-                                    Rewrite command parser because its overly complex and hard to deal with. (Now with
-                                    over
-                                    half as much parsing code)
-                                </li>
-                            </ol>
-                        </li>
-
-                        <li>
-                            <h6>Footer Menu</h6>
-                            <ol>
-                                <li>
-                                    <input type="checkbox" checked>
-                                    Group all footer declarations into 1 file. (So its easy to find and update them)
-                                </li>
-                                <li>
-                                    <input type="checkbox" checked>
-                                    Hook into the action search to display the options for each menu action when needed
-                                </li>
-                            </ol>
-                        </li>
-
-                        <li>
-                            <h6>Action Commands</h6>
-                            <ol>
-                                <li>
-                                    <input type="checkbox" checked>
-                                    Fix fullscreen command. Make typescript be happy with the function calls.
-                                </li>
-                                <li>
-                                    <input type="checkbox" checked>
-                                    Create file controller
-                                </li>
-                                <li>
-                                    <input type="checkbox" checked>
-                                    Create help controller
-                                </li>
-                                <li>
-                                    <input type="checkbox" checked>
-                                    Create Edit controller
-                                </li>
-                            </ol>
-                        </li>
-
-                        <li>
-                            <h6>Notification Panel</h6>
-                            <ol>
-                                <li>
-                                    <input type="checkbox" checked>
-                                    Create Service
-                                </li>
-                                <li>
-                                    <input type="checkbox" checked>
-                                    Log Message, error, and warning
-                                </li>
-                                <li>
-                                    <input type="checkbox" checked>
-                                    Removable notifications
-                                </li>
-                                <li>
-                                    <input type="checkbox" checked>
-                                    Slide in from right and fade out when new notification. They stack upwards.
-                                </li>
-                            </ol>
-                        </li>
-
-                        <li>
-                            <h6>Configuration Support</h6>
-                            <ol>
-                                <li>
-                                    <input type="checkbox" checked>
-                                    <s>Allow for registering configuration files to be run after all services are
-                                        started</s> Just use a extension for this purpose.
-                                </li>
-                            </ol>
-                        </li>
-
-                        <li>
-                            <h6>App load update</h6>
-                            <ol>
-                                <li>
-                                    <input type="checkbox" checked>
-                                    Add splash screen that is shown by default and covers the whole screen
-                                </li>
-                                <li>
-                                    <input type="checkbox" checked>
-                                    Splash screen is removed after all extensions, controllers, and
-                                    configurations are loaded
-                                </li>
-                                <li>
-                                    <input type="checkbox" checked>
-                                    A ProtoPaint logo is displayed and some sort of loading animation is displayed.
-                                </li>
-                            </ol>
-                        </li>
-
-                        <li>
-                            <h6>Help Commands</h6>
-                            <ol>
-                                <li>
-                                    <input type="checkbox">
-                                    Tutorial
-                                </li>
-                                <li>
-                                    <input type="checkbox">
-                                    Display/Remap Keyboard Commands
-                                </li>
-                                <li>
-                                    <input type="checkbox">
-                                    Explain actionsearch controls
-                                </li>
-                            </ol>
-                        </li>
-
-                        <li>
-                            <h6>Edit controller</h6>
-                            <ol>
-                                <li>
-                                    <input type="checkbox">
-                                    Create new shape
-                                </li>
-                                <li>
-                                    <input type="checkbox">
-                                    Move virtual cursor
-                                </li>
-                                <li>
-                                    <input type="checkbox">
-                                    Change layer
-                                </li>
-                            </ol>
-                        </li>
-
-                        <li>
-                            <h6>File controller</h6>
-                            <ol>
-                                <li>
-                                    <input type="checkbox">
-                                    save
-                                </li>
-                                <li>
-                                    <input type="checkbox">
-                                    new project
-                                </li>
-                            </ol>
-                        </li>
-                    </ul>
-                    <!--
-                <li>
-                    <h6>Topic 1</h6>
-                    <ol>
-                        <li>
-                            <input type="checkbox">
-                            Item 1
-                        </li>
-                        <li>
-                            <input type="checkbox">
-                            Item 2
-                        </li>
-                    </ol>
-                </li>
-                -->
-                </div>
             </div>
 
             <!-- Right Panel-->
-            <div data-panel="right" data-resize="left">
-                <div class="scrolly">
-                    <h4>My library notes</h4>
-                    <ol>
-                        <li>
-                            <h5>KeyCommander.js</h5>
-                            <p>
-                                Small library that makes binding key combinations(not sequences) super easy. Used for
-                                all
-                                keyboard input in this app and for the time being is mostly complete. In due time I will
-                                be
-                                making a npm package for this
-                            </p>
-                            <h6>Bugs:</h6>
-                            <ol>
-                                <li>Fails to remove "F" keys from key press history buffer</li>
-                            </ol>
-                        </li>
-                        <li>
-                            <h5>ActionCommander.js</h5>
-                            <p>
-                                The core of this application. This framework allows the creation of CLI like commands
-                                within
-                                controller classes. These commands can then be optionally bound to keyboard combinations
-                                or
-                                though the use of extensions appear in menus. By default this framework makes use of
-                                extensions, services, and controllers.
-                            </p>
-                            <br>
-                            <h6>Extensions: </h6>
-                            <p>
-                                Take advantage of many different hooks within ActionCommander. They get direct access to
-                                the
-                                api to control functionality.
-                            </p>
-                            <h6>Services</h6>
-                            <p>
-                                Can be declared as a singleton or as a transient service. They make use of dependency
-                                injection and also can be used in both extensions, controllers, and/or other services.
-                                They
-                                do not get access to hooks or the core api.
-                            </p>
-                            <h6>Controllers</h6>
-                            <p>
-                                Used to define the commands/actions to be used inside the application. They have access
-                                to
-                                use any service as needed but not extensions or the core api.
-                            </p>
+            <div data-panel="right" data-resize="left" class="no-select">
 
-                            <h6>Future:</h6>
-                            <p>
-                                The main api of this framework feels complete but small changes may come in the future.
-                                It
-                                is still decoupled from the rest of the project so it could gain a npm module of its own
-                                someday. This framework grew very large very quickly so at some point a refractor may be
-                                needed to trim some unneeded code off and also it definitely needs testing.
-                            </p>
-                        </li>
-                        <li>
-                            <h5>Resize.js</h5>
-                            <p>
-                                Used to allow these panels to be resized simply by adding a data tag and indicating the
-                                side
-                                to
-                                be able to be resized. Will make a npm package in the future. Functionally complete.
-                            </p>
-                        </li>
-                    </ol>
-                </div>
+                <project-menu title="New Project"></project-menu>
+                <menu-container title="Project Settings" toggle>
+                    TODO
+                    Default Layer Type(Pixel/Vector)
+                </menu-container>
+                <menu-container title="Frame Settings" class="closed" toggle>
+                    TODO
+                </menu-container>
+                <menu-container title="Layer Settings" class="closed" toggle>
+                    TODO
+                </menu-container>
             </div>
 
             <!-- Notification Panel-->
@@ -372,13 +92,18 @@
 
     <div id="splash">
         <h1 class="shine">ProtoPaint</h1>
-        <!-- <p>Status stuff here</p> -->
     </div>
 
-    <script type="module" crossorigin="anonymous" src="./js/index.js"></script>
-    <script type="module" crossorigin="anonymous" src="./lib/resize/js/resize.js"></script>
-    <script src="https://kit.fontawesome.com/c28c7acd54.js" crossorigin="anonymous"></script>
+    <!-- Web Components -->
+    <script type="module" crossorigin="anonymous" src="./js/webcomponents/project-menu.js"></script>
+    <script type="module" crossorigin="anonymous" src="./js/webcomponents/menu-item.js"></script>
+    <script type="module" crossorigin="anonymous" src="./js/webcomponents/menu-container.js"></script>
 
+    <!-- ProtoPaint-->
+    <script type="module" crossorigin="anonymous" src="./js/index.js"></script>
+
+    <!-- Other -->
+    <script type="module" crossorigin="anonymous" src="./lib/resize/js/resize.js"></script>
 </body>
 
 </html>

@@ -130,7 +130,7 @@ export class Observable<T> implements IObservable<T>{
 
     //#endregion
 
-    //#region Observerable.of()
+    //#region Observable.of()
 
     public static of<R>(...items: R[]): Observable<R> {
 

@@ -35,8 +35,7 @@ class Resize{
 
         this._dragElement.addEventListener("mousedown", (e) => {
             e.preventDefault();
-            let el = document.activeElement as HTMLElement;
-            el.blur();
+            (document.activeElement as HTMLElement).blur();
 
             startX = e.clientX;
             startY = e.clientY;
