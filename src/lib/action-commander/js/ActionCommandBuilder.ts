@@ -1,7 +1,7 @@
 import { IConfiguration } from "./interfaces/IConfiguration.js";
 import { IStartup } from "./interfaces/IStartup.js";
- import { ServiceCollection } from "../../dependency-injection/js/DependencyInjection.js";
-  import { ActionCommander } from "./ActionCommander.js";
+import { ServiceCollection } from "../../dependency-injection/js/DependencyInjection.js";
+import { ActionCommander } from "./ActionCommander.js";
 
 export const ActionCommanderBuilder = new class ActionCommanderBuilder {
 
@@ -39,7 +39,7 @@ export const ActionCommanderBuilder = new class ActionCommanderBuilder {
         //init startup
         let startup = new this._startup(this._configuration);
 
-        //initilize services
+        //initialize services
         startup.configureServices(ServiceCollection);
 
         //construct actionCommander
@@ -48,8 +48,8 @@ export const ActionCommanderBuilder = new class ActionCommanderBuilder {
         //run startup configure
         startup.configure(app);
 
-        app.init()
+        app.init();
 
     }
 
-}
+};

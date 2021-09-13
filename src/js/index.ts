@@ -1,6 +1,6 @@
 import { Canvas } from "./controllers/Canvas.js";
 import { View } from "./controllers/View.js";
-import { FooterConfiguration } from "./extensions/FooterConfiguration.js";
+import { FooterConfiguration } from "./configurations/FooterConfiguration.js";
 import { InteractionLayer } from "./extensions/InteractionLayerExtension.js";
 import { EditMode } from "./modes/EditMode.js";
 import { PanMode } from "./modes/PanMode.js";
@@ -27,6 +27,10 @@ import { Edit } from "./controllers/Edit.js";
 import { FileController } from "./controllers/FileController.js";
 import { Help } from "./controllers/Help.js";
 import { FlagForm } from "./extensions/FlagFormExtension.js";
+import { NotificationService } from "./services/NotificationService.js";
+import { SplashScreen } from "./extensions/SplashScreenExtension.js";
+import { ProjectService } from "./services/ProjectService.js";
+import { PixelDrawingService } from "./services/PixelDrawingService.js";
 
 class Startup implements IStartup {
 
@@ -47,7 +51,8 @@ class Startup implements IStartup {
         services.addSingleton(PanelService);
         services.configure(PanelService, (ps) => {
             ps.registerPanel("Left", 'div[data-panel="left"]');
-            ps.registerPanel("Right", 'div[data-panel="right"]');
+            ps.registerPanel("Project Menu", 'div[data-panel="right"]');
+            ps.registerPanel("Notifications", 'div[data-panel="notifications"]');
         });
 
         services.addSingleton(InteractionModeService);
@@ -58,8 +63,26 @@ class Startup implements IStartup {
 
         services.addSingleton(FooterService);
         services.addSingleton(MouseService);
-        services.addSingleton(FlagOptionService)
+        services.addSingleton(FlagOptionService);
 
+        services.addSingleton(NotificationService);
+        services.configure(NotificationService, (ns) => {
+            ns.notificationContainer = document.querySelector(`div[data-panel="notifications"]>div.content`);
+        });
+
+        services.addSingleton(ProjectService);
+        services.configure(ProjectService, (p) => {
+            p.menuElement = document.querySelector("project-menu");
+        });
+
+        services.addSingleton(PixelDrawingService);
+
+        // Event Testing
+        // window.addEventListener("test", _ => {
+        //     console.log("HEYYYYYYYYY YAAAAAAAAAA");
+        // });
+
+        // window.dispatchEvent(new Event("test"));
     }
 
 
@@ -81,7 +104,7 @@ class Startup implements IStartup {
         app.configureExtension(ActionSuggestions, (as) => {
             as.defaultDataSourceKey = "suggestions";
             as.onFocusDataSourceKey = "controllers";
-        })
+        });
 
         //Register and configure the autocomplete extension
         app.registerExtension(Autocomplete);
@@ -97,7 +120,7 @@ class Startup implements IStartup {
             ib.buttons = new Map([
                 [`<i class="fas fa-play"></i>`, (a) => a.submitSearch()],
                 [`<i class="fas fa-times"></i>`, (a) => a.clear()],
-            ])
+            ]);
         });
 
         //#endregion
@@ -108,6 +131,10 @@ class Startup implements IStartup {
         app.registerExtension(FileMenuExtension);
         app.registerExtension(FlagForm);
         //...
+
+
+        //Do Last
+        app.registerExtension(SplashScreen);
 
     }
 }
@@ -121,7 +148,7 @@ let config: IConfiguration = {
         Help
     ]
 
-}
+};
 
 function main() {
     ActionCommanderBuilder

@@ -2,7 +2,7 @@
 import { IActionExtension } from "../interfaces/IActionExtension.js";
 import { IActionCommander } from "../ActionCommander.js";
 import { DataSourceCollection, IDataSource, IDataPart, SourceMode, SelectMode } from "../services/DataSourceCollection.js";
-import { IParsedCommmand } from "../interfaces/IParsedCommand.js";
+import { IParsedCommand } from "../interfaces/IParsedCommand.js";
 import { extension } from "../../../dependency-injection/js/DependencyInjection.js";
 import { Observable, fromProperty } from "../../../observable/js/observable.js";
 
@@ -50,7 +50,7 @@ export class ActionHistory implements IActionExtension {
 
     }
 
-    public onSubmit(parsedCommand: IParsedCommmand): void {
+    public onSubmit(parsedCommand: IParsedCommand): void {
 
         let command = this._actionCommander.getText();
 

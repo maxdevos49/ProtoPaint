@@ -1,5 +1,5 @@
 import { IActionCommander } from "../ActionCommander.js";
-import { IParsedCommmand } from "./IParsedCommand.js";
+import { IParsedCommand } from "./IParsedCommand.js";
 
 export interface IActionExtension {
 
@@ -7,12 +7,12 @@ export interface IActionExtension {
 
     onInput?(event: KeyboardEvent): void;
     onChange?(): void;
-    onSubmit?(parsedCommand: IParsedCommmand): void;
+    onSubmit?(parsedCommand: IParsedCommand): void;
 
-    onExecution?(parsedCommand: IParsedCommmand): void;
-    onExecutionCancel?(parsedCommand: IParsedCommmand): void;
-    onSuccess?(parsedCommand: IParsedCommmand): void;
-    onError?(parsedCommand: IParsedCommmand): void;
+    onExecution?(parsedCommand: IParsedCommand): void;
+    onExecutionCancel?(parsedCommand: IParsedCommand): void;
+    onSuccess?(parsedCommand: IParsedCommand): void;
+    onError?(parsedCommand: IParsedCommand): void;
     onFocus?(): void;
     onBlur?(): void;
 
