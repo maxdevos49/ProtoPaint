@@ -15,7 +15,7 @@
     },
     "dependencies": {
         "ip": "^1.1.5",
-        "express": "^4.17.1",
+        "express": "^4.17.3",
         "source-map-support": "^0.5.12",
         "esm": "^3.2.25"
     },
